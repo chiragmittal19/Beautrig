@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         canvasColor: Colors.black54,
         cursorColor: Colors.white70,
         textTheme: TextTheme(
-          title: TextStyle(
+          headline6: TextStyle(
             color: Colors.white
           )
         ),
@@ -24,8 +24,14 @@ class MyApp extends StatelessWidget {
           labelStyle: TextStyle(
             color: Colors.white70
           ),
+          hintStyle: TextStyle(
+              color: Colors.white70
+          ),
           counterStyle: TextStyle(
             color: Colors.white
+          ),
+          errorStyle: TextStyle(
+              color: Colors.white70
           ),
           focusedBorder: OutlineInputBorder(
             borderSide: const BorderSide(
@@ -38,7 +44,19 @@ class MyApp extends StatelessWidget {
               color: Colors.white,
               width: 1
             )
-          )
+          ),
+          errorBorder: OutlineInputBorder(
+              borderSide: const BorderSide(
+                  color: Colors.white70,
+                  width: 1
+              )
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+              borderSide: const BorderSide(
+                  color: Colors.white70,
+                  width: 1
+              )
+          ),
         )
       ),
       debugShowCheckedModeBanner: false,

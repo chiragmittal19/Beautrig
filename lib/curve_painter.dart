@@ -2,6 +2,7 @@ import 'dart:developer' as dev;
 import 'dart:math';
 import 'dart:ui' as ui;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -28,15 +29,19 @@ class CurvePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    if (_picture == null) {
-      var recorder = ui.PictureRecorder();
-      _renderDrawing(Canvas(recorder), size);
-      _picture = recorder.endRecording();
-    }
-
-    canvas.drawPicture(_picture);
-    if (_size == null) {
-      _size = size;
+    if (kIsWeb) {
+      _renderDrawing(canvas, size);
+    } else {
+      if (_picture == null) {
+        var recorder = ui.PictureRecorder();
+        _renderDrawing(Canvas(recorder), size);
+        _picture = recorder.endRecording();
+      }
+  
+      canvas.drawPicture(_picture);
+      if (_size == null) {
+        _size = size;
+      }
     }
   }
 
@@ -88,7 +93,7 @@ class CurvePainter extends CustomPainter {
 
       canvas.drawCircle(Offset(
           (size.width / 2) + x,
-          (size.height / 2) + ((heightFactor * (numCurves - iteration + 1)) * trigValue)),
+          (size.height / 2) - ((heightFactor * (numCurves - iteration + 1)) * trigValue)),
           radius, Paint()..color = c);
     }
 
